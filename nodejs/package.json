@@ -1,0 +1,28 @@
+{
+  "name": "iot-upskill",
+  "version": "1.0.0",
+  "description": "IoT AWS infrastructure and training apps",
+  "main": "echo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PGS Software; Andrzej Dudek",
+  "license": "LGPL-2.0-only",
+  "dependencies": {
+    "aws-iot-device-sdk": "^2.2.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adudek/iot-upskill.git"
+  },
+  "keywords": [
+    "IoT",
+    "AWS",
+    "training"
+  ],
+  "bugs": {
+    "url": "https://github.com/adudek/iot-upskill/issues"
+  },
+  "homepage": "https://github.com/adudek/iot-upskill#readme"
+}
