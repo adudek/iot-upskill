@@ -4,7 +4,7 @@ Licenced under LGPLv2
 
 ## Prepare AWS iot infrastructure
 cd terraform
-AWS_PROFILE=profile terraform apply
+terraform apply
 
 ## Run node.js iot sdk program
 cd nodejs

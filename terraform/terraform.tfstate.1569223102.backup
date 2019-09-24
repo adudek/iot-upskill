@@ -1,23 +1,9 @@
 {
   "version": 4,
   "terraform_version": "0.12.8",
-  "serial": 168,
+  "serial": 130,
   "lineage": "146daed3-a220-1a3f-5aff-6c47c0e0a707",
-  "outputs": {
-    "cacert": {
-      "value": {
-        "autoRegistrationStatus": "ENABLE",
-        "certificateArn": "arn:aws:iot:eu-central-1:663092282778:cacert/850fa6f3ce3cf9031ba60a6b41ed419dfba48535ce97697da1e655035fef5670",
-        "certificateId": "850fa6f3ce3cf9031ba60a6b41ed419dfba48535ce97697da1e655035fef5670",
-        "certificatePem": "-----BEGIN CERTIFICATE-----\nMIICwDCCAaigAwIBAgIJAM+liKPI0YVuMA0GCSqGSIb3DQEBBQUAMBExDzANBgNV\nBAMMBklvVCBDQTAeFw0xOTA5MjYxMTE1MDJaFw0yOTA5MjMxMTE1MDJaMBExDzAN\nBgNVBAMMBklvVCBDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL5X\nqcS2g/5MSZoQDfkIcOR1nDa/GCZQC2On3IvPx4eS8GNad2UNi+17Eg2JL89Dnh1/\nVbO98e4onZicB+NQFhqwTD+9K3RMMZXlrLkjXp4yBbiStId0xi0LuQsncUg/j0En\nXBlRfnnonskESlPsW5u5Gje2dVSxoN2smsZOvye1//lua2galnkEixoz0LGpPoTv\n2OVbsF2YVd8jelkBSnwq8eBueBZZg+58QDZ41nJP18uX5dptZCebHA7v8yxQo6lb\nb8kW3TKdL+tkHsZFn2wzBguFfZHKf2BY5ihHbq5YEP7VN59roZauVv/nrV91R1nO\nLOZYv23D1RgKgkLFkNMCAwEAAaMbMBkwDAYDVR0TBAUwAwEB/zAJBgNVHREEAjAA\nMA0GCSqGSIb3DQEBBQUAA4IBAQBLomvlhpl6BGhX7zVVIJOwxVjEQhdEzGnePOjS\n1vZCIxVC0ZvYAXMLstsYnQlQaupp6iYF3gjlq3w8yMb/7ueWZiHbfFfM3pnGFqXj\nKd8SNCkvlVV/k3DGHsZz7z+SKu/kJ/8Ie2Sem/RSlMOZ0DRYGVRessoyRnOrJPp5\njS1tFRANUE2cYLz8mFhMy+0f150Bmjf/K650HnOKCPWQRCBjSq0cK6DvjUlqhSFj\nA3z+1SiWMqssyNr18lbJGERpQ6b6Qxlp1/RQjI41orhJIuRv6BQrYjFlGQQLnEZy\n8mktae1glc8xor6DjTIp1n4ASqW8ZL+w/mNGmI1TnUFvTqsQ\n-----END CERTIFICATE-----\n",
-        "status": "ACTIVE"
-      },
-      "type": [
-        "map",
-        "string"
-      ]
-    }
-  },
+  "outputs": {},
   "resources": [
     {
       "mode": "data",
@@ -56,10 +42,9 @@
       ]
     },
     {
-      "module": "module.cacert",
       "mode": "data",
       "type": "external",
-      "name": "cacert",
+      "name": "root_cacert",
       "provider": "provider.external",
       "instances": [
         {
@@ -69,27 +54,13 @@
             "program": [
               "bash",
               "-eux",
-              "./modules/selfsigned_cacert/external/ca-cert-gen.sh"
+              "external/root-cacert-gen.sh",
+              "certs/ca-root/caroot-cert"
             ],
-            "query": {
-              "active": "ACTIVE",
-              "autoregistration": "ENABLE",
-              "awsProfile": "personal",
-              "awsRegion": "eu-central-1",
-              "cacertConf": "./modules/selfsigned_cacert/external/ca-cert.conf",
-              "cacertKey": "./out/certs/ca-cert.key",
-              "cacertPem": "./out/certs/ca-cert.pem",
-              "carootKey": "./out/certs/ca-root.key",
-              "carootPem": "./out/certs/ca-root.pem",
-              "certificate_information": "/CN=IoT CA/emailAddress=em@il",
-              "createCerts": "create"
-            },
+            "query": null,
             "result": {
-              "autoRegistrationStatus": "ENABLE",
-              "certificateArn": "arn:aws:iot:eu-central-1:663092282778:cacert/850fa6f3ce3cf9031ba60a6b41ed419dfba48535ce97697da1e655035fef5670",
-              "certificateId": "850fa6f3ce3cf9031ba60a6b41ed419dfba48535ce97697da1e655035fef5670",
-              "certificatePem": "-----BEGIN CERTIFICATE-----\nMIICwDCCAaigAwIBAgIJAM+liKPI0YVuMA0GCSqGSIb3DQEBBQUAMBExDzANBgNV\nBAMMBklvVCBDQTAeFw0xOTA5MjYxMTE1MDJaFw0yOTA5MjMxMTE1MDJaMBExDzAN\nBgNVBAMMBklvVCBDQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL5X\nqcS2g/5MSZoQDfkIcOR1nDa/GCZQC2On3IvPx4eS8GNad2UNi+17Eg2JL89Dnh1/\nVbO98e4onZicB+NQFhqwTD+9K3RMMZXlrLkjXp4yBbiStId0xi0LuQsncUg/j0En\nXBlRfnnonskESlPsW5u5Gje2dVSxoN2smsZOvye1//lua2galnkEixoz0LGpPoTv\n2OVbsF2YVd8jelkBSnwq8eBueBZZg+58QDZ41nJP18uX5dptZCebHA7v8yxQo6lb\nb8kW3TKdL+tkHsZFn2wzBguFfZHKf2BY5ihHbq5YEP7VN59roZauVv/nrV91R1nO\nLOZYv23D1RgKgkLFkNMCAwEAAaMbMBkwDAYDVR0TBAUwAwEB/zAJBgNVHREEAjAA\nMA0GCSqGSIb3DQEBBQUAA4IBAQBLomvlhpl6BGhX7zVVIJOwxVjEQhdEzGnePOjS\n1vZCIxVC0ZvYAXMLstsYnQlQaupp6iYF3gjlq3w8yMb/7ueWZiHbfFfM3pnGFqXj\nKd8SNCkvlVV/k3DGHsZz7z+SKu/kJ/8Ie2Sem/RSlMOZ0DRYGVRessoyRnOrJPp5\njS1tFRANUE2cYLz8mFhMy+0f150Bmjf/K650HnOKCPWQRCBjSq0cK6DvjUlqhSFj\nA3z+1SiWMqssyNr18lbJGERpQ6b6Qxlp1/RQjI41orhJIuRv6BQrYjFlGQQLnEZy\n8mktae1glc8xor6DjTIp1n4ASqW8ZL+w/mNGmI1TnUFvTqsQ\n-----END CERTIFICATE-----\n",
-              "status": "ACTIVE"
+              "key": "certs/ca-root/caroot-cert.key",
+              "pem": "certs/ca-root/caroot-cert.pem"
             },
             "working_dir": null
           }
