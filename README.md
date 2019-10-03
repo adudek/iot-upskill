@@ -3,8 +3,16 @@ Example code developed for PGS Software.
 Licenced under LGPLv2
 
 ## Prepare AWS iot infrastructure
+```
+brew|rpm|apt|apk install jq
 cd terraform
+platform="darwin_amd64|linux_amd64"
+release="terraform-provider-shell_v0.1.1"
+mkdir -p .terraform/plugins/${platform}
+wget "https://github.com/scottwinkler/terraform-provider-shell/releases/download/v0.1.1/terraform-provider-shell_v0.1.1.${platform}.${platform}" -o ".terraform/plugins/${platform}/${release}"
+terraform init
 terraform apply
+```
 
 ## Run node.js iot sdk program
 cd nodejs
