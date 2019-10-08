@@ -14,6 +14,16 @@ module "cacert" {
   allow_autoregistration = 1
 }
 
+module "device_cert" {
+  source = "./modules/iot_owncert"
+
+  aws_profile = "${var.aws_profile}"
+  aws_region = "${var.aws_region}"
+  status = "INACTIVE"
+  caroot_key = "${module.cacert.cert.caroot_key}"
+  caroot_pem = "${module.cacert.cert.caroot_pem}"
+}
+
 data "aws_iam_policy_document" "pubsuball" {
   statement {
     effect = "Allow"
