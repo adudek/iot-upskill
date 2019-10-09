@@ -20,8 +20,8 @@ module "device_cert" {
   aws_profile = "${var.aws_profile}"
   aws_region = "${var.aws_region}"
   status = "INACTIVE"
-  caroot_key = "${module.cacert.cert.caroot_key}"
-  caroot_pem = "${module.cacert.cert.caroot_pem}"
+  caroot_key = "${module.cacert.certificate_data.caroot_key}"
+  caroot_pem = "${module.cacert.certificate_data.caroot_pem}"
 }
 
 data "aws_iam_policy_document" "pubsuball" {
@@ -37,6 +37,10 @@ resource "aws_iot_policy" "pubsuball" {
   policy = "${data.aws_iam_policy_document.pubsuball.json}"
 }
 
+output "device_cert" {
+  value = "${module.device_cert.certificate_data}"
+}
+
 output "cacert" {
-  value = "${module.cacert.cert}"
+  value = "${module.cacert.certificate_data}"
 }
