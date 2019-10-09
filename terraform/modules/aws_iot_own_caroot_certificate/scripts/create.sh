@@ -46,15 +46,14 @@ certificateId="$(jq -r '.certificateId' <(
   ${awsCmd} iot register-ca-certificate --ca-certificate "${carootPem}" --verification-certificate "${cacertPem}" ${flags[${allow_autoregistration}]} ${flags[${active}]}
 ))"
 
-cat <(jq ".certificateDescription | {
-    certificate_id: .certificateId,
-    certificate_arn: .certificateArn,
-    certificate_key: \"${cacertKey}\",
-    certificate_pem: .certificatePem,
-    status: .status,
-    auto_registration_status: .autoRegistrationStatus,
-    certificate_srl: \"${cacertSrl}\",
-    caroot_key: \"${carootKey}\",
-    caroot_pem: \"${carootPem}\"
-  }" <(${awsCmd} iot describe-ca-certificate --certificate-id ${certificateId})
+cat <(jq ".certificateDescription |
+    {
+      id: .certificateId,
+      arn: .certificateArn,
+      key: \"${carootKey}\",
+      pem: .certificatePem,
+      status: .status,
+      auto_registration_status: .autoRegistrationStatus
+    }
+  " <(${awsCmd} iot describe-ca-certificate --certificate-id ${certificateId})
 )

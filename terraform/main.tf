@@ -6,22 +6,22 @@ provider "aws" {
 provider "shell" {}
 
 module "cacert" {
-  source = "./modules/iot_cacert"
+  source = "./modules/aws_iot_own_caroot_certificate"
 
   aws_profile = "${var.aws_profile}"
   aws_region = "${var.aws_region}"
   active = 1
-  allow_autoregistration = 1
+  allow_autoregistration = 0
 }
 
 module "device_cert" {
-  source = "./modules/iot_owncert"
+  source = "./modules/aws_iot_own_device_certificate"
 
   aws_profile = "${var.aws_profile}"
   aws_region = "${var.aws_region}"
-  status = "INACTIVE"
-  caroot_key = "${module.cacert.certificate_data.caroot_key}"
-  caroot_pem = "${module.cacert.certificate_data.caroot_pem}"
+  status = "ACTIVE"
+  caroot_key = "${module.cacert.certificate_data.key}"
+  caroot_pem = "${module.cacert.certificate_data.pem}"
 }
 
 data "aws_iam_policy_document" "pubsuball" {

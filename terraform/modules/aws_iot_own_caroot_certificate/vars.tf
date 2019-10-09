@@ -19,7 +19,7 @@ variable "allow_autoregistration" {
 }
 
 variable "certificate_information" {
-  default = "/CN=throwaway IoT CA/emailAddress=em@il"
+  default = "/CN=throwaway IoT CA root/emailAddress=em@il"
 }
 
 # root CA

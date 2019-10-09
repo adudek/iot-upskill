@@ -19,13 +19,14 @@ certificateId="$(jq -r '.certificateId' <(
   ${awsCmd} iot register-certificate --certificate-pem "${certPem}" --ca-certificate-pem "${caroot_pem}" --status ${status}
 ))"
 
-cat <(jq ".certificateDescription | {
-    certificate_arn: .certificateArn,
-    certificate_id: .certificateId,
-    ca_certificate_id: .caCertificateId,
-    status: .status,
-    certificate_pem: .certificatePem,
-    certificate_key: \"${certKey}\",
-    certificate_srl: \"${certSrl}\",
-  }" <(${awsCmd} iot describe-certificate --certificate-id ${certificateId})
+cat <(jq ".certificateDescription |
+    {
+      arn: .certificateArn,
+      id: .certificateId,
+      ca_certificate_id: .caCertificateId,
+      status: .status,
+      pem: .certificatePem,
+      key: \"${certKey}\"
+    }
+  " <(${awsCmd} iot describe-certificate --certificate-id ${certificateId})
 )

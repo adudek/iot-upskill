@@ -6,9 +6,7 @@ resource "aws_iot_thing" "something" {
   }
 }
 
-/*
 resource "aws_iot_thing_principal_attachment" "something_pubsuball" {
-  principal = "${aws_iot_certificate.thing_cert.arn}"
+  principal = "${module.device_cert.certificate_data.arn}"
   thing     = "${aws_iot_thing.something.name}"
 }
-*/
