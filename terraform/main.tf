@@ -5,7 +5,7 @@ provider "aws" {
 
 provider "shell" {}
 
-module "cacert" {
+module "aws_iot_own_caroot_certificate" {
   source = "./modules/aws_iot_own_caroot_certificate"
 
   aws_profile = "${var.aws_profile}"
@@ -14,14 +14,14 @@ module "cacert" {
   allow_autoregistration = 0
 }
 
-module "device_cert" {
+module "aws_iot_own_device_certificate" {
   source = "./modules/aws_iot_own_device_certificate"
 
-  aws_profile = "${var.aws_profile}"
-  aws_region = "${var.aws_region}"
+  aws_profile = var.aws_profile
+  aws_region = var.aws_region
   status = "ACTIVE"
-  caroot_key = "${module.cacert.certificate_data.key}"
-  caroot_pem = "${module.cacert.certificate_data.pem}"
+  caroot_key = module.aws_iot_own_caroot_certificate.key
+  caroot_pem = module.aws_iot_own_caroot_certificate.pem
 }
 
 data "aws_iam_policy_document" "pubsuball" {
@@ -34,13 +34,13 @@ data "aws_iam_policy_document" "pubsuball" {
 
 resource "aws_iot_policy" "pubsuball" {
   name = "pubsuball"
-  policy = "${data.aws_iam_policy_document.pubsuball.json}"
+  policy = data.aws_iam_policy_document.pubsuball.json
 }
 
 output "device_cert" {
-  value = "${module.device_cert.certificate_data}"
+  value = module.aws_iot_own_device_certificate.arn
 }
 
 output "cacert" {
-  value = "${module.cacert.certificate_data}"
+  value = module.aws_iot_own_caroot_certificate.arn
 }
