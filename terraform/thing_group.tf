@@ -22,7 +22,3 @@ resource "aws_iot_policy_attachment" "somethinggroup_pubsuball" {
   policy = aws_iot_policy.pubsuball.name
   target = module.aws_iot_thing_group-my_group_1.arn
 }
-
-output "thing_group" {
-  value = module.aws_iot_thing_group-my_group_1.arn
-}

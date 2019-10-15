@@ -2,7 +2,7 @@ resource "aws_iot_thing" "anything" {
   name = "anything"
 
   attributes = {
-    some = "thing"
+    any = "thing"
   }
 }
 

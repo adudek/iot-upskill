@@ -34,11 +34,3 @@ resource "aws_iot_policy_attachment" "device_certificate_pubsuball" {
   policy = aws_iot_policy.pubsuball.name
   target = module.aws_iot_own_device_certificate.arn
 }
-
-output "device_cert" {
-  value = module.aws_iot_own_device_certificate.arn
-}
-
-output "cacert" {
-  value = module.aws_iot_own_caroot_certificate.arn
-}
