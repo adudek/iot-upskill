@@ -1,3 +1,7 @@
+resource "aws_iot_certificate" "aws_cert" {
+  active = true
+}
+
 module "aws_iot_own_caroot_certificate" {
   source = "./modules/aws_iot_own_caroot_certificate"
 
