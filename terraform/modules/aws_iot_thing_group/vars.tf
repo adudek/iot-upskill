@@ -15,8 +15,3 @@ variable "name" {
 variable "parent_group_name" {
   default = ""
 }
-
-variable "things" {
-  type = "list"
-  default = []
-}

@@ -1,4 +1,8 @@
 resource "aws_iot_thing" "anything" {
+  lifecycle {
+    create_before_destroy = true
+  }
+
   name = "anything"
 
   attributes = {

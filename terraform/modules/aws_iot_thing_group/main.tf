@@ -5,10 +5,15 @@ For more information on PGS Software, please visit www.pgs-soft.com
 */
 
 resource "shell_script" "thing_group" {
+  triggers = {
+    parent_group_name = var.parent_group_name
+    name              = var.name
+  }
+
   lifecycle_commands {
     create = "bash -eux scripts/create.sh >&3"
     read   = "cat >&3"
-    delete = "bash -eux scripts/delete.sh #${md5(jsonencode(local.taint))}"
+    delete = "bash -eux scripts/delete.sh"
   }
 
   working_directory = "${path.module}"
@@ -18,12 +23,5 @@ resource "shell_script" "thing_group" {
     aws_profile             = "${var.aws_profile}"
     name                    = "${var.name}"
     parent_group_name       = "${var.parent_group_name}"
-  }
-}
-
-locals {
-  taint = {
-    name              = "${var.name}"
-    parent_group_name = "${var.parent_group_name}"
   }
 }

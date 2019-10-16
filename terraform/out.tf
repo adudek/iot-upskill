@@ -3,18 +3,13 @@ locals {
 }
 
 resource "local_file" "certificate_key" {
-  content     = module.aws_iot_own_device_certificate.key
+  content     = module.aws_iot_own_device_certificate.private_key
   filename    = "${local.outdir}/certificate.key"
 }
 
 resource "local_file" "certificate_pem" {
-  content     = module.aws_iot_own_device_certificate.pem
+  content     = module.aws_iot_own_device_certificate.certificate_pem
   filename    = "${local.outdir}/certificate.pem"
-}
-
-resource "local_file" "rootca_pem" {
-  content     = module.aws_iot_own_caroot_certificate.pem
-  filename    = "${local.outdir}/root_ca.pem"
 }
 
 resource "local_file" "aws_certificate_key" {

@@ -10,7 +10,7 @@ resource "shell_script" "thing_group" {
   lifecycle_commands {
     create = "bash -eux scripts/create.sh >&3"
     read   = "cat >&3"
-    delete = "bash -eux scripts/delete.sh #${md5(jsonencode("asdf"))}"
+    delete = "bash -eux scripts/delete.sh"
   }
 
   working_directory = path.module

@@ -13,8 +13,8 @@ module "aws_iot_own_device_certificate" {
   aws_profile = var.aws_profile
   aws_region = var.aws_region
   status = "ACTIVE"
-  caroot_key = module.aws_iot_own_caroot_certificate.key
-  caroot_pem = module.aws_iot_own_caroot_certificate.pem
+  caroot_key = module.aws_iot_own_caroot_certificate.private_key
+  caroot_pem = module.aws_iot_own_caroot_certificate.certificate_pem
 }
 
 data "aws_iam_policy_document" "pubsuball" {
