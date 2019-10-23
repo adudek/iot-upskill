@@ -7,9 +7,9 @@ Licenced under LGPLv2
 brew|rpm|apt|apk install jq
 cd terraform
 platform="darwin_amd64|linux_amd64"
-release="terraform-provider-shell_v0.1.1"
+release="terraform-provider-shell_v0.1.2"
 mkdir -p .terraform/plugins/${platform}
-wget "https://github.com/scottwinkler/terraform-provider-shell/releases/download/v0.1.1/terraform-provider-shell_v0.1.1.${platform}.${platform}" -o ".terraform/plugins/${platform}/${release}"
+wget "https://github.com/scottwinkler/${release/_/releases/download}/${release}.${platform}.${platform}" -o ".terraform/plugins/${platform}/${release}"
 terraform init
 terraform apply
 ```
@@ -18,3 +18,4 @@ terraform apply
 cd nodejs
 npm install
 node echo.js
+node shadow.js
