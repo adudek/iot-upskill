@@ -5,6 +5,7 @@ For more information on PGS Software, please visit www.pgs-soft.com
 */
 
 resource "shell_script" "thing_group" {
+
   for_each = toset(var.things)
 
   lifecycle_commands {

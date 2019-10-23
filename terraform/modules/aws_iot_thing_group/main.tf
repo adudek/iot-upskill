@@ -5,6 +5,7 @@ For more information on PGS Software, please visit www.pgs-soft.com
 */
 
 resource "shell_script" "thing_group" {
+
   triggers = {
     parent_group_name = var.parent_group_name
     name              = var.name

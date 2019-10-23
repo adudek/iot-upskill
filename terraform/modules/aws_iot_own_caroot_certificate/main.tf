@@ -5,6 +5,7 @@ For more information on PGS Software, please visit www.pgs-soft.com
 */
 
 resource "shell_script" "ca_root" {
+
   triggers = {
     certificate_information = var.certificate_information
     cacert_pem              = var.cacert_pem
