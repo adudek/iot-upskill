@@ -9,7 +9,7 @@ cd terraform
 platform="darwin_amd64|linux_amd64"
 release="terraform-provider-shell_v0.1.2"
 mkdir -p .terraform/plugins/${platform}
-wget "https://github.com/scottwinkler/${release/_/releases/download}/${release}.${platform}.${platform}" -o ".terraform/plugins/${platform}/${release}"
+curl -L "https://github.com/scottwinkler/${release/_//releases/download/}/${release}.${platform}" -o ".terraform/plugins/${platform}/${release}"
 terraform init
 terraform apply
 ```
