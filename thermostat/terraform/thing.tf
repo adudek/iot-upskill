@@ -1,9 +1,3 @@
-data "template_file" "thing_type_list" {
-  count = length(values(var.things))
-
-  template = "${values(var.things).*.type[count.index]}"
-}
-
 resource "aws_iot_thing_type" "customer_thing_type" {
   for_each = toset(distinct(data.template_file.thing_type_list.*.rendered))
 

@@ -4,7 +4,7 @@ things = {
     customer_name = "test1"
     type = "thermostat"
     tags = {
-      Cusomer = "test1"
+      Customer = "test1"
     }
   }
 
@@ -13,7 +13,7 @@ things = {
     customer_name = "test2"
     type = "thermostat"
     tags = {
-      Cusomer = "test2"
+      Customer = "test2"
     }
   }
 }

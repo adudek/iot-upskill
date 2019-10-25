@@ -1,30 +1,42 @@
-
 data "aws_iam_policy_document" "thing_pubsub" {
-  for_each = var.things
+
+  statement {
+    effect    = "Allow"
+    actions   = [
+      "iot:Connect",
+      "iot:GetThingShadow"
+    ]
+    resources = [ "arn:${local.aws_iot_partition}:client/&{iot:Connection.Thing.ThingName}" ]
+  }
 
   statement {
     effect    = "Allow"
     actions   = [
       "iot:Publish",
-      "iot:Connect"
+      "iot:Receive"
     ]
     resources = [
-      "${replace(aws_iot_thing.customer_thing[each.key].arn, "/:thing/.*/", "")}:client/&{iot:Connection.Thing.ThingName}",
-      "${replace(aws_iot_thing.customer_thing[each.key].arn, "/:thing/.*/", "")}:topic/&{iot:Connection.Thing.ThingName}",
+      "arn:${local.aws_iot_partition}:topic/&{iot:Connection.Thing.ThingName}",
+      "arn:${local.aws_iot_partition}:topic/&{iot:Connection.Thing.ThingName}/*",
     ]
+  }
+
+  statement {
+    effect    = "Allow"
+    actions   = [ "iot:Subscribe" ]
+    resources = [ "arn:${local.aws_iot_partition}:topicfilter/*" ]
   }
 }
 
-resource "aws_iot_policy" "thing_pubsub" {
-  for_each = var.things
+resource "aws_iot_policy" "client_topic_pubsub" {
 
-  name   = "client-${each.key}-pubsub"
-  policy = data.aws_iam_policy_document.thing_pubsub[each.key].json
+  name   = "client-topic-pubsub"
+  policy = data.aws_iam_policy_document.thing_pubsub.json
 }
 
-resource "aws_iot_policy_attachment" "device_certificate_pubsuball" {
+resource "aws_iot_policy_attachment" "device_certificate_pubsub" {
   for_each = aws_iot_certificate.aws_cert
 
-  policy = "client-${each.key}-pubsub"
+  policy = aws_iot_policy.client_topic_pubsub.id
   target = each.value.arn
 }

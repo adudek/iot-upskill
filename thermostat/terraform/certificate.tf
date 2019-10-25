@@ -1,5 +1,5 @@
 locals {
-  outdir = "out"
+  outdir = "work/device_certs"
 }
 
 resource "aws_iot_certificate" "aws_cert" {
