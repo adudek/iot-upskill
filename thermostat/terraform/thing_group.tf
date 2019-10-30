@@ -1,29 +1,20 @@
-module "measurements_logging" {
+module "ephemeral" {
   source = "./libs/aws_iot_thing_group"
 
   aws_profile = var.aws_profile
   aws_region  = var.aws_region
-  name        = "measurements-logging"
+  name        = "ephemeral"
 }
 
-resource "aws_iot_policy_attachment" "measurements_logging" {
-  policy = aws_iot_policy.client_topic_pubsub.id
-  target = module.measurements_logging.arn
-}
-
-module "measurements_discard" {
+module "persistent" {
   source = "./libs/aws_iot_thing_group"
 
   aws_profile = var.aws_profile
   aws_region  = var.aws_region
-  name        = "dynamodb-discard"
+  name        = "persistent"
 }
 
-module "default_measurments_logging" {
-  source = "./libs/aws_iot_things_thing_group_assignment"
-
-  aws_profile      = var.aws_profile
-  aws_region       = var.aws_region
-  thing_group_name = module.measurements_logging.name
-  things           = keys(var.things)
+resource "aws_iot_policy_attachment" "persistent" {
+  policy = aws_iot_policy.dynamodb_write.id
+  target = module.persistent.arn
 }

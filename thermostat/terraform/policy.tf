@@ -28,15 +28,23 @@ data "aws_iam_policy_document" "thing_pubsub" {
   }
 }
 
+data "aws_iam_policy_document" "dynamodb_write" {
+
+  statement {
+    effect    = "Allow"
+    actions   = [ "dynamodb:none" ]
+    resources = [ "arn:${local.aws_iot_partition}:*" ]
+  }
+}
+
 resource "aws_iot_policy" "client_topic_pubsub" {
 
   name   = "client-topic-pubsub"
   policy = data.aws_iam_policy_document.thing_pubsub.json
 }
 
-resource "aws_iot_policy_attachment" "device_certificate_pubsub" {
-  for_each = aws_iot_certificate.aws_cert
+resource "aws_iot_policy" "dynamodb_write" {
 
-  policy = aws_iot_policy.client_topic_pubsub.id
-  target = each.value.arn
+  name   = "dynamodb-write"
+  policy = data.aws_iam_policy_document.dynamodb_write.json
 }

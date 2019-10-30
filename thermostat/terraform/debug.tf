@@ -1,7 +1,7 @@
-resource "null_resource" "thermostat" {
-  for_each = var.things
+output "things" {
+  value = var.things
+}
 
-  provisioner "local-exec" {
-    command = "echo 'key: ${each.key}, value: ${jsonencode(each.value)}'"
-  }
+output "regio" {
+  value = data.aws_region.current.endpoint
 }
